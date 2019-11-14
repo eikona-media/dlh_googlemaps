@@ -1,5 +1,5 @@
 <?php
-$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/dlh_googlemaps/assets/frontend.js';
+$GLOBALS['TL_JAVASCRIPT']['dlh_googlemaps_frontend'] = 'system/modules/dlh_googlemaps/assets/frontend.js';
 ?>
 
 <!-- indexer::stop -->
@@ -15,14 +15,16 @@ $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/dlh_googlemaps/assets/frontend.js'
         <p><?= ($this->map['protected'] != '1' && $this->map['staticMapNoscript'] ? $this->map['staticMap'] : $this->labels['noscript']); ?></p>
     </noscript>
 </div>
+
 <script>
+
 dlhGoogleMaps.cookieDays = <?= (int)$GLOBALS['TL_CONFIG']['dlh_googlemaps']['cookiedays']; ?>;
 
 function gmap<?= $this->map['id']; ?>_initialize() {
     var map = {
         id: <?= (int)$this->map['id']; ?>,
         protected: <?= (bool)$this->map['protected']; ?>,
-        privacy: <?php echo json_encode(
+        privacy: <?= json_encode(
             ($this->map['privacy'] == '') ? $this->labels['privacy'] : $this->map['privacy']
         ); ?>,
         apiKey: "<?= $this->map['key']; ?>",
@@ -169,9 +171,8 @@ function gmap<?= $this->map['id']; ?>_generate() {
     <?php
     // tabcontrol
     echo $this->tabs ? $this->map['tabsCode'] : ''; ?>
+
 }
-
-
 
 if(window.addEvent) {
     window.addEvent('domready', function() {

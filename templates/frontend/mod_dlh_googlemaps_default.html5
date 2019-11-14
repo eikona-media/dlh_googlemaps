@@ -11,9 +11,9 @@ $GLOBALS['TL_JAVASCRIPT']['dlh_googlemaps_frontend'] = 'system/modules/dlh_googl
 
 <div class="dlh_googlemap block" id="dlh_googlemap_<?= $this->map['id']; ?>"
      style="<?= $this->map['mapSize']['position'].$this->map['mapSize']['width'].$this->map['mapSize']['height'].$this->map['mapSize']['padding']; ?>">
-        <noscript>
-            <p><?= ($this->map['protected'] != '1' && $this->map['staticMapNoscript'] ? $this->map['staticMap'] : $this->labels['noscript']); ?></p>
-        </noscript>
+    <noscript>
+        <p><?= ($this->map['protected'] != '1' && $this->map['staticMapNoscript'] ? $this->map['staticMap'] : $this->labels['noscript']); ?></p>
+    </noscript>
 </div>
 
 <script>
@@ -25,7 +25,7 @@ function gmap<?= $this->map['id']; ?>_initialize() {
         id: <?= (int)$this->map['id']; ?>,
         protected: <?= (bool)$this->map['protected']; ?>,
         privacy: <?= json_encode(
-        ($this->map['privacy'] == '') ? $this->labels['privacy'] : $this->map['privacy']
+            ($this->map['privacy'] == '') ? $this->labels['privacy'] : $this->map['privacy']
         ); ?>,
         apiKey: "<?= $this->map['key']; ?>",
         apiLanguage: "<?= $this->map['language']; ?>",
@@ -49,32 +49,32 @@ function gmap<?= $this->map['id']; ?>_generate() {
         return false;
     }
 
-    var gmap<?= $this->map['id']; ?>_Options = {
+	var gmap<?= $this->map['id']; ?>_Options = {
 
-        zoom: <?= $this->map['zoom']; ?>
-        , center: new google.maps.LatLng(<?= $this->map['center']; ?>)
-        , mapTypeId: google.maps.MapTypeId.<?= $this->map['mapTypeId']; ?>
-        , draggable: <?= $this->map['draggable']; ?>
-        , disableDoubleClickZoom: <?= $this->map['disableDoubleClickZoom']; ?>
-        , scrollwheel: <?= $this->map['scrollwheel']; ?>
+		zoom: <?= $this->map['zoom']; ?>
+		, center: new google.maps.LatLng(<?= $this->map['center']; ?>)
+		, mapTypeId: google.maps.MapTypeId.<?= $this->map['mapTypeId']; ?>
+		, draggable: <?= $this->map['draggable']; ?>
+		, disableDoubleClickZoom: <?= $this->map['disableDoubleClickZoom']; ?>
+		, scrollwheel: <?= $this->map['scrollwheel']; ?>
 
 
         <?php if ($this->map['useMapTypeControl']) : ?>
-        , mapTypeControl: true
-        , mapTypeControlOptions: {
-            style: google.maps.MapTypeControlStyle.<?= $this->map['mapTypeControlStyle']; ?>
-            , position: google.maps.ControlPosition.<?= $this->map['mapTypeControlPos']; ?>
-            <?php if (is_array($this->map['mapTypesAvailable'])) : ?>
-            , mapTypeIds: [
-                <?php foreach($this->map['mapTypesAvailable'] as $k=>$v) : ?>
-                <?php if($k>0) echo ','; ?>google.maps.MapTypeId.<?= $v; ?>
-                <?php endforeach; ?>
-            ]
-            <?php endif; ?>
-        }
-        <?php else : ?>
-        , mapTypeControl: false
-        <?php endif; ?>
+		, mapTypeControl: true
+		, mapTypeControlOptions: {
+			style: google.maps.MapTypeControlStyle.<?= $this->map['mapTypeControlStyle']; ?>
+			, position: google.maps.ControlPosition.<?= $this->map['mapTypeControlPos']; ?>
+			<?php if (is_array($this->map['mapTypesAvailable'])) : ?>
+			, mapTypeIds: [
+				<?php foreach($this->map['mapTypesAvailable'] as $k=>$v) : ?>
+					<?php if($k>0) echo ','; ?>google.maps.MapTypeId.<?= $v; ?>
+				<?php endforeach; ?>
+				]
+			<?php endif; ?>
+		}
+    	<?php else : ?>
+		, mapTypeControl: false
+    	<?php endif; ?>
 
 
         <?php if ($this->map['useOverviewMapControl']) : ?>
@@ -118,37 +118,37 @@ function gmap<?= $this->map['id']; ?>_generate() {
 
 
         <?php if ($this->map['useZoomControl']) : ?>
-        , zoomControl: true
-        , zoomControlOptions: {
-            style: google.maps.ZoomControlStyle.<?= $this->map['zoomControlStyle']; ?>,
-            position: google.maps.ControlPosition.<?= $this->map['zoomControlPos']; ?>
-        }
-        <?php else : ?>
-        , zoomControl: false
-        <?php endif; ?>
+		, zoomControl: true
+		, zoomControlOptions: {
+			style: google.maps.ZoomControlStyle.<?= $this->map['zoomControlStyle']; ?>,
+			position: google.maps.ControlPosition.<?= $this->map['zoomControlPos']; ?>
+		}
+		<?php else : ?>
+		, zoomControl: false
+		<?php endif; ?>
 
 
-        <?php if ($this->map['useScaleControl']) : ?>
-        , scaleControl: true
-        , scaleControlOptions: {
-            position: google.maps.ControlPosition.<?= $this->map['scaleControlPos']; ?>
-        }
-        <?php else : ?>
-        , scaleControl: false
-        <?php endif; ?>
+		<?php if ($this->map['useScaleControl']) : ?>
+		, scaleControl: true
+		, scaleControlOptions: {
+			position: google.maps.ControlPosition.<?= $this->map['scaleControlPos']; ?>
+		}
+		<?php else : ?>
+		, scaleControl: false
+		<?php endif; ?>
 
 
-        <?php if ($this->map['parameter']) : ?>
-        , <?= $this->map['parameter']; ?>
-        <?php endif; ?>
+		<?php if ($this->map['parameter']) : ?>
+		, <?= $this->map['parameter']; ?>
+		<?php endif; ?>
 
     };
 
     google.maps.event.addDomListener(window, 'resize', function() {
-        var center = gmap<?=$this->map['id'];?>.getCenter();
+        var center = gmap<?= $this->map['id'];?>.getCenter();
 
-        google.maps.event.trigger(gmap<?=$this->map['id'];?>, 'resize');
-        gmap<?=$this->map['id'];?>.setCenter(center);
+        google.maps.event.trigger(gmap<?= $this->map['id'];?>, 'resize');
+        gmap<?= $this->map['id'];?>.setCenter(center);
     });
 
     var gmap<?= $this->map['id']; ?> = new google.maps.Map(document.getElementById("dlh_googlemap_<?= $this->map['id']; ?>"), gmap<?= $this->map['id']; ?>_Options);
@@ -160,9 +160,9 @@ function gmap<?= $this->map['id']; ?>_generate() {
     // Auto-generated map elements
     foreach($this->map['elements'] AS $element) : echo $element['parsed']; endforeach; ?>
 
-    if(window.gmap<?= $this->map['id']; ?>_dynmap){
-        gmap<?= $this->map['id']; ?>_dynmap(gmap<?= $this->map['id']; ?>);
-    }
+	if(window.gmap<?= $this->map['id']; ?>_dynmap){
+		gmap<?= $this->map['id']; ?>_dynmap(gmap<?= $this->map['id']; ?>);
+	}
 
     <?php if($this->map['useClusterer']): ?>
     var gmap<?= $this->map['id']; ?>_markerCluster = new MarkerClusterer(gmap<?= $this->map['id']; ?>, gmap<?= $this->map['id']; ?>_markers, {imagePath: '<?= $this->map['clusterImg']; ?>/m'});

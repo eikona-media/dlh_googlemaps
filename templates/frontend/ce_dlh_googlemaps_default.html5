@@ -16,7 +16,7 @@ $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/dlh_googlemaps/assets/frontend.js'
     </noscript>
 </div>
 <script>
-var dlh_googlemaps_cookie_days = <?= (int)$GLOBALS['TL_CONFIG']['dlh_googlemaps']['cookiedays']; ?>;
+dlhGoogleMaps.cookieDays = <?= (int)$GLOBALS['TL_CONFIG']['dlh_googlemaps']['cookiedays']; ?>;
 
 function gmap<?= $this->map['id']; ?>_initialize() {
     var map = {
@@ -28,15 +28,15 @@ function gmap<?= $this->map['id']; ?>_initialize() {
         api_url: "https://maps.googleapis.com/maps/api/js?key=<?= $this->map['key']; ?>&language=<?= $this->map['language']; ?>",
     };
 
-    if (dlh_googlemaps_get_cookie() || !map.protected) {
-        dlh_googlemaps_load_scripts(map);
+    if (dlhGoogleMaps.getCookie() || !map.protected) {
+        dlhGoogleMaps.loadScripts(map);
     } else {
-        dlh_googlemaps_ask_confirmation(map);
+        dlhGoogleMaps.askConfirmation(map);
     }
 }
 
 function gmap<?= $this->map['id']; ?>_allow() {
-    dlh_googlemaps_set_cookie();
+    dlhGoogleMaps.setCookie();
     gmap<?= $this->map['id']; ?>_initialize();
 }
 

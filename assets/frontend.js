@@ -60,7 +60,7 @@ function DlhGoogleMaps() {
             apiAdded = true;
             var mapsScript = document.createElement('script');
             mapsScript.type = 'text/javascript';
-            mapsScript.src = 'https://maps.googleapis.com/maps/api/js?key=' + map.apiKey + '&language=' + map.apiLanguage + '&callback=dlhGoogleMaps.apiInitCallback';
+            mapsScript.src = '//maps.googleapis.com/maps/api/js?key=' + map.apiKey + '&language=' + map.apiLanguage + '&callback=dlhGoogleMaps.apiInitCallback';
             mapsScript.async = true;
             mapsScript.defer = true;
             document.getElementsByTagName('head')[0].appendChild(mapsScript);

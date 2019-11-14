@@ -1,6 +1,9 @@
 function DlhGoogleMaps() {
     this.cookieName = 'dlh_googlemaps';
     this.cookieDays = 365 * 86400;
+    var apiAdded = false;
+    var apiInitialized = false;
+    var mapCallbacks = [];
 
     this.getCookie = function () {
         var name = this.cookieName + "=";
@@ -22,18 +25,18 @@ function DlhGoogleMaps() {
         document.cookie = this.cookieName + '=ok; max-age=' + this.cookieDays + ' ; path=/';
     }
 
-    this.loadScripts = function (map) {
+    this.generateMap = function (map) {
         var functionName = "gmap" + map.id + "_generate";
-        if (typeof window[functionName] == "function") {
-            var mapsScript = document.createElement('script');
-            mapsScript.type = 'text/javascript';
-            mapsScript.src = 'https://maps.googleapis.com/maps/api/js?key=' + map.apiKey + '&language=' + map.apiLanguage + '&callback=' + functionName;
-            mapsScript.async = true;
-            mapsScript.defer = true;
-            document.getElementsByTagName('head')[0].appendChild(mapsScript);
-        } else {
-            console.log(functionName + ' is missing');
+        mapCallbacks.push(functionName);
+        loadApi(map);
+        if (apiInitialized) {
+            initCallbacks();
         }
+    }
+
+    this.apiInitCallback = function () {
+        apiInitialized = true;
+        initCallbacks();
     }
 
     this.askConfirmation = function (map) {
@@ -50,6 +53,29 @@ function DlhGoogleMaps() {
         var mapElement = document.getElementById("dlh_googlemap_" + map.id);
         mapElement.innerHTML = '';
         mapElement.appendChild(confirmElement);
+    }
+
+    var loadApi = function (map) {
+        if (!apiAdded) {
+            apiAdded = true;
+            var mapsScript = document.createElement('script');
+            mapsScript.type = 'text/javascript';
+            mapsScript.src = 'https://maps.googleapis.com/maps/api/js?key=' + map.apiKey + '&language=' + map.apiLanguage + '&callback=dlhGoogleMaps.apiInitCallback';
+            mapsScript.async = true;
+            mapsScript.defer = true;
+            document.getElementsByTagName('head')[0].appendChild(mapsScript);
+        }
+    }
+
+    var initCallbacks = function () {
+        for (i = 0; i < mapCallbacks.length; i++) {
+            var functionName = mapCallbacks[i];
+            if (typeof window[functionName] == "function") {
+                window[functionName]();
+            } else {
+                console.log(functionName + ' is missing');
+            }
+        }
     }
 }
 

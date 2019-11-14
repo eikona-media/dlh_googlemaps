@@ -30,7 +30,7 @@ function gmap<?= $this->map['id']; ?>_initialize() {
     };
 
     if (dlhGoogleMaps.getCookie() || !map.protected) {
-        dlhGoogleMaps.loadScripts(map);
+        dlhGoogleMaps.generateMap(map);
     } else {
         dlhGoogleMaps.askConfirmation(map);
     }

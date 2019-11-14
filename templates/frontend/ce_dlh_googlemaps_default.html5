@@ -25,7 +25,8 @@ function gmap<?= $this->map['id']; ?>_initialize() {
         privacy: <?php echo json_encode(
             ($this->map['privacy'] == '') ? $this->labels['privacy'] : $this->map['privacy']
         ); ?>,
-        api_url: "https://maps.googleapis.com/maps/api/js?key=<?= $this->map['key']; ?>&language=<?= $this->map['language']; ?>",
+        apiKey: "<?= $this->map['key']; ?>",
+        apiLanguage: "<?= $this->map['language']; ?>",
     };
 
     if (dlhGoogleMaps.getCookie() || !map.protected) {

@@ -27,10 +27,12 @@ function DlhGoogleMaps() {
         if (typeof window[functionName] == "function") {
             var mapsScript = document.createElement('script');
             mapsScript.type = 'text/javascript';
-            mapsScript.src = map.api_url + '&callback=' + functionName;
+            mapsScript.src = 'https://maps.googleapis.com/maps/api/js?key=' + map.apiKey + '&language=' + map.apiLanguage + '&callback=' + functionName;
             mapsScript.async = true;
             mapsScript.defer = true;
             document.getElementsByTagName('head')[0].appendChild(mapsScript);
+        } else {
+            console.log(functionName + ' is missing');
         }
     }
 
@@ -41,6 +43,8 @@ function DlhGoogleMaps() {
         confirmElement.innerHTML = map.privacy;
         if (typeof window[functionName] == "function") {
             confirmElement.onclick = window[functionName];
+        } else {
+            console.log(functionName + ' is missing');
         }
 
         var mapElement = document.getElementById("dlh_googlemap_" + map.id);

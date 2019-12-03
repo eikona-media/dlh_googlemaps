@@ -39,11 +39,16 @@ function DlhGoogleMaps() {
         confirmElement.setAttribute("id", "confirm-googlemaps_" + map.id);
         confirmElement.setAttribute("class", "dlh_googlemap_confirm");
         confirmElement.innerHTML = map.privacy;
+
+        var button = document.createElement('button');
+        button.setAttribute("class", "btn-confirm");
+        button.innerHTML = map.privacyConfirmation;
         if (typeof window[functionName] == "function") {
-            confirmElement.onclick = window[functionName];
+            button.onclick = window[functionName];
         } else {
             console.log(functionName + ' is missing');
         }
+        confirmElement.appendChild(button);
 
         var mapElement = document.getElementById("dlh_googlemap_" + map.id);
         mapElement.setAttribute("class", "dlh_googlemap block is-confirm");

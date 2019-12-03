@@ -31,6 +31,7 @@ function gmap<?= $this->map['id']; ?>_initialize() {
         privacy: <?= json_encode(
             ($this->map['privacy'] == '') ? $this->labels['privacy'] : $this->map['privacy']
         ); ?>,
+        privacyConfirmation: <?= json_encode($this->labels['privacyConfirmation']); ?>,
         apiKey: "<?= $this->map['key']; ?>",
         apiLanguage: "<?= $this->map['language']; ?>",
     };

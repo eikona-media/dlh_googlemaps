@@ -22,8 +22,6 @@ $GLOBALS['TL_JAVASCRIPT']['dlh_googlemaps_frontend'] = 'system/modules/dlh_googl
 
 <script>
 
-dlhGoogleMaps.cookieDays = <?= (int)$GLOBALS['TL_CONFIG']['dlh_googlemaps']['cookiedays']; ?>;
-
 function gmap<?= $this->map['id']; ?>_initialize() {
     var map = {
         id: <?= (int)$this->map['id']; ?>,

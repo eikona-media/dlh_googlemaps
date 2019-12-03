@@ -1,6 +1,5 @@
 function DlhGoogleMaps() {
     this.storageItemName = 'dlh_googlemaps';
-    this.cookieDays = 365 * 86400;
     var apiAdded = false;
     var apiInitialized = false;
     var mapCallbacks = [];

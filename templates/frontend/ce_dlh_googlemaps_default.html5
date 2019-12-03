@@ -31,7 +31,7 @@ function gmap<?= $this->map['id']; ?>_initialize() {
         apiLanguage: "<?= $this->map['language']; ?>",
     };
 
-    if (dlhGoogleMaps.getCookie() || !map.protected) {
+    if (dlhGoogleMaps.hasStorageItem() || !map.protected) {
         dlhGoogleMaps.generateMap(map);
     } else {
         dlhGoogleMaps.askConfirmation(map);
@@ -39,7 +39,7 @@ function gmap<?= $this->map['id']; ?>_initialize() {
 }
 
 function gmap<?= $this->map['id']; ?>_allow() {
-    dlhGoogleMaps.setCookie();
+    dlhGoogleMaps.setStorageItem();
     gmap<?= $this->map['id']; ?>_initialize();
 }
 

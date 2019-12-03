@@ -1,28 +1,20 @@
 function DlhGoogleMaps() {
-    this.cookieName = 'dlh_googlemaps';
+    this.storageItemName = 'dlh_googlemaps';
     this.cookieDays = 365 * 86400;
     var apiAdded = false;
     var apiInitialized = false;
     var mapCallbacks = [];
 
-    this.getCookie = function () {
-        var name = this.cookieName + "=";
-        var decodedCookie = decodeURIComponent(document.cookie);
-        var ca = decodedCookie.split(';');
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
-            }
+    this.hasStorageItem = function () {
+        var item = localStorage.getItem(this.storageItemName)
+        if (item !== null) {
+            return true
         }
         return false;
     }
 
-    this.setCookie = function () {
-        document.cookie = this.cookieName + '=ok; max-age=' + this.cookieDays + ' ; path=/';
+    this.setStorageItem = function () {
+        localStorage.setItem(this.storageItemName, JSON.stringify({value: 'ok', timestamp: new Date().getTime()}));
     }
 
     this.generateMap = function (map) {

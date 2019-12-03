@@ -34,7 +34,8 @@ function DlhGoogleMaps() {
     this.askConfirmation = function (map) {
         var functionName = "gmap" + map.id + "_allow";
         var confirmElement = document.createElement("div");
-        confirmElement.setAttribute("id", "confirm-googlemaps");
+        confirmElement.setAttribute("id", "confirm-googlemaps_" + map.id);
+        confirmElement.setAttribute("class", "dlh_googlemap_confirm");
         confirmElement.innerHTML = map.privacy;
         if (typeof window[functionName] == "function") {
             confirmElement.onclick = window[functionName];

@@ -42,7 +42,13 @@
         <target>بسیارخوب</target>
       </trans-unit>
       <trans-unit id="dlh_googlemaps.labels.privacy">
-        <source>This website uses Google Maps - click here to permanently activate it. I agree with the transfer of ma data to Google. Notice: You can withdraw your confirmation at any time for the future by deleting he cookie dlh_googlemaps. In our privacy policy You'll find further information about our way to deal with user data.</source>
+        <source>This website uses Google Maps. I agree with the transfer of ma data to Google. Notice: You can withdraw your confirmation at any time for the future. In our privacy policy You'll find further information about our way to deal with user data.</source>
+      </trans-unit>
+      <trans-unit id="dlh_googlemaps.labels.privacyConfirmation">
+        <source>Activate map</source>
+      </trans-unit>
+      <trans-unit id="dlh_googlemaps.labels.cancelConfirmation">
+        <source>Withdraw your confirmation</source>
       </trans-unit>
     </body>
   </file>

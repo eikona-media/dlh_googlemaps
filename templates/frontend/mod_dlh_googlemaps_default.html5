@@ -178,6 +178,8 @@ function gmap<?= $this->map['id']; ?>_generate() {
     // tabcontrol
     echo $this->tabs ? $this->map['tabsCode'] : ''; ?>
 
+    var mapElement = document.getElementById("dlh_googlemap_<?= $this->map['id']; ?>");
+    mapElement.setAttribute("class", "dlh_googlemap block is-map");
 }
 
 if(window.addEvent) {

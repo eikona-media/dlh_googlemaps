@@ -20,6 +20,8 @@ function DlhGoogleMaps() {
     this.generateMap = function (map) {
         var functionName = "gmap" + map.id + "_generate";
         mapCallbacks.push(functionName);
+        var mapElement = document.getElementById("dlh_googlemap_" + map.id);
+        mapElement.setAttribute("class", "dlh_googlemap block is-loading");
         loadApi(map);
         if (apiInitialized) {
             initCallbacks();
@@ -44,6 +46,7 @@ function DlhGoogleMaps() {
         }
 
         var mapElement = document.getElementById("dlh_googlemap_" + map.id);
+        mapElement.setAttribute("class", "dlh_googlemap block is-confirm");
         mapElement.innerHTML = '';
         mapElement.appendChild(confirmElement);
     }

@@ -16,6 +16,10 @@ $GLOBALS['TL_JAVASCRIPT']['dlh_googlemaps_frontend'] = 'system/modules/dlh_googl
     </noscript>
 </div>
 
+<a href="#" onclick="dlhGoogleMaps.cancelConfirmation(); return false;" class="dlh_googlemap_cancel" style="display: none;">
+    <?= $this->labels['cancelConfirmation']; ?>
+</a>
+
 <script>
 
 dlhGoogleMaps.cookieDays = <?= (int)$GLOBALS['TL_CONFIG']['dlh_googlemaps']['cookiedays']; ?>;
@@ -32,8 +36,10 @@ function gmap<?= $this->map['id']; ?>_initialize() {
     };
 
     if (dlhGoogleMaps.hasStorageItem() || !map.protected) {
+        dlhGoogleMaps.showCancel(map);
         dlhGoogleMaps.generateMap(map);
     } else {
+        dlhGoogleMaps.hideCancel(map);
         dlhGoogleMaps.askConfirmation(map);
     }
 }

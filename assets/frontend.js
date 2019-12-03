@@ -47,6 +47,27 @@ function DlhGoogleMaps() {
         mapElement.appendChild(confirmElement);
     }
 
+    this.showCancel = function () {
+        var x = document.getElementsByClassName("dlh_googlemap_cancel");
+        var i;
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "block";
+        }
+    }
+
+    this.hideCancel = function () {
+        var x = document.getElementsByClassName("dlh_googlemap_cancel");
+        var i;
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+    }
+
+    this.cancelConfirmation = function () {
+        localStorage.removeItem(this.storageItemName);
+        location.reload();
+    }
+
     var loadApi = function (map) {
         if (!apiAdded) {
             apiAdded = true;

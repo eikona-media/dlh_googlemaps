@@ -201,7 +201,7 @@ class Googlemap extends \Frontend
         }
 
         // generate static map end
-        $arrMap['staticMap'] .= '" alt="' . $GLOBALS['TL_LANG']['tl_dlh_googlemaps']['labels']['noscript'] . '"' . $strTagEnding;
+        $arrMap['staticMap'] .= '" alt="' . $GLOBALS['TL_LANG']['dlh_googlemaps']['labels']['noscript'] . '"' . $strTagEnding;
 
         $arrMap['tabsCode'] = self::getTabsCode($intMap);
 

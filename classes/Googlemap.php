@@ -139,22 +139,22 @@ class Googlemap extends \Frontend
 
             $arrMap['mapSize']['position'] = '';
             $arrMap['mapSize']['width'] = 'width:'.(is_numeric($arrMap['mapSize'][0]) ? intval($arrMap['mapSize'][0]).'px':$arrMap['mapSize'][0]).';';
-            $arrMap['mapSize']['height'] = 'height:'.(is_numeric($arrMap['mapSize'][1]) ? intval($arrMap['mapSize'][1]).'px':$arrMap['mapSize'][1]).';';           
+            $arrMap['mapSize']['height'] = 'height:'.(is_numeric($arrMap['mapSize'][1]) ? intval($arrMap['mapSize'][1]).'px':$arrMap['mapSize'][1]).';';
             $arrMap['mapSize']['padding'] = '';
         }
         else
         {
             $arrMap['mapSize'][0] = intval($arrMap['mapSize'][0]);
             $arrMap['mapSize'][1] = intval($arrMap['mapSize'][1]);
-            
+
             $staticMapWidth = 640;
             $staticMapRel = (100/$arrMap['mapSize'][0])*$arrMap['mapSize'][1];
 
             $arrMap['staticMap'] .= $staticMapWidth.'x' . intval($staticMapRel*$staticMapWidth/100);
- 
+
             $arrMap['mapSize']['position'] = 'position:relative;';
             $arrMap['mapSize']['width'] = 'width:100%;';
-            $arrMap['mapSize']['height'] = '';           
+            $arrMap['mapSize']['height'] = '';
             $arrMap['mapSize']['padding'] = 'padding-bottom:'.$staticMapRel.'%;';
         }
 
@@ -261,11 +261,11 @@ class Googlemap extends \Frontend
             $arrElement['iconAnchor'][1] = floor($arrElement['iconSize'][1] / 2) + $arrElement['iconAnchor'][1];
         }
 
-        $objFile                  = \FilesModel::findByPk($arrElement['overlaySRC']);
-        $arrElement['overlaySRC'] = $objFile->path;
+        $objFile                  = !empty($arrElement['overlaySRC']) ? \FilesModel::findByPk($arrElement['overlaySRC']) : null;
+        $arrElement['overlaySRC'] = $objFile ? $objFile->path : '';
 
-        $objFile                 = \FilesModel::findByPk($arrElement['shadowSRC']);
-        $arrElement['shadowSRC'] = $objFile->path;
+        $objFile                 = !empty($arrElement['shadowSRC']) ? \FilesModel::findByPk($arrElement['shadowSRC']) : null;
+        $arrElement['shadowSRC'] = $objFile ? $objFile->path : '';
 
         $arrElement['shadowSize'] = deserialize($arrElement['shadowSize']);
 
